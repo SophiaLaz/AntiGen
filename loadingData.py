@@ -35,7 +35,6 @@ for file_i in tqdm(filenames[:1]):
     try:
         dfi = pd.read_csv(parth+file_i, skiprows=1, usecols=columns).drop_duplicates()
         countChains += dfi.shape[0]
-        # Add columns in dataframe
         for chain_i in ['heavy', 'light']:
             dfi = concatenate_regions(dfi, chain_i)
             for name_i in ['fwr1', 'cdr1', 'fwr2', 'cdr2', 'fwr3', 'cdr3', 'fwr4']:
@@ -69,7 +68,5 @@ for file_i in tqdm(filenames[:1]):
         print(f'File {file_i} is not correct: {except_i}')
 
 print(f'\ncountShortedFw = {countShortedFw}, \ncountShortedCdr = {countShortedCdr}')
-print(f'Количество пар цепей изначально {countChains}, в датафрейме {df.shape[0]}, размер датафрейма: {df.shape}')
+print(f'Количество пар цепей изначально {countChains} в датафрейме {df.shape[0]}, размер датафрейма: {df.shape}')
 df.to_csv('files/all_sequences.csv', columns=df.columns, index=False)
-
-# |Deletions: 10, 20|Insertion: A82A, T82B|Missing cisteine|Shorter than IMGT defined: fw1|
